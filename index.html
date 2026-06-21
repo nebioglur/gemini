@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kardelen - Gözlem Eşleştirme Sistemi</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --primary-color: #2ecc71;
+            --text-color: #2c3e50;
+            --border-color: #e2e8f0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        h2 {
+            color: #2980b9;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-top: 0;
+        }
+        .alert-box {
+            background-color: #ebf5fb;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            border-radius: 0 4px 4px 0;
+            margin-bottom: 20px;
+        }
+        .error-box {
+            background-color: #fdf2f2;
+            border-left: 4px solid #e74c3c;
+            padding: 15px;
+            border-radius: 0 4px 4px 0;
+            margin-bottom: 20px;
+        }
+        pre {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>❄️ Kardelen Otomasyon Sistemi</h1>
+        <p>Meteoroloji Veri Doğrulama ve Saat Eşleştirme Motoru</p>
+    </div>
+
+    <div class="card">
+        <h2>📌 Karar ve Tolerans Kuralları</h2>
+        
+        <div class="alert-box">
+            <strong>[DURUM 1] Farklı Gözlem Dönemleri:</strong><br>
+            Veriler karşılaştırılmaz - HATA verilmez. Farklı dönemlerin rasatı olarak kabul edilir.
+        </div>
+
+        <div class="error-box">
+            <strong>[DURUM 2] Eşleşen Saatlerde Farklı Değerler:</strong><br>
+            Eğer saatler eşleşiyorsa ve değerler farklıysa &rarr; <strong>HATA raporlanır.</strong><br>
+            Birim hataları ve gözlemsel uyumsuzluklar da bu aşamada denetlenir.
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>⚙️ Sistem Akış Diyagramı</h2>
+        <pre>
+      METAR (23:50)           SİNOPTİK (00:00)
+           |                         |
+           +------------+------------+
+                        |
+               Saat Eşleştirme Motoru
+              (saat_eslestirme.py)
+                        |
+            +-----------+-----------+
+            |                       |
+      Fark &le; 15 dakika?        Tolerans dışı?
+       Saatler eşleşir        Kontrol yapılmaz
+            |                       |
+    Verileri kontrol et     Rasatı görmezden gel
+      Hata raporla                  |
+                                 HATA YOK
+        </pre>
+    </div>
+</div>
+
+</body>
+</html>
